@@ -1,0 +1,16 @@
+{
+  "name": "proyectopreentrega",
+  "version": "1.0.0",
+  "description": "Proyecto Final Pre-Entrega",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Alveiro Izarra",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.6.2"
+  }
+}
