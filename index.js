@@ -27,6 +27,7 @@ if (args[0] === "GET" && args[1] === "products") {
     busquedaDatosFakeStore() 
 }
 else if (args[0] === 'GET' && args[1].startsWith("products/")) {
+    // con startsWith valido la 
     async function busquedaProductosID() {
         try {
             // extraigo con startsWith el indice o ID que quiero buscar
@@ -116,7 +117,7 @@ else if (args[0] === 'DELETE' && args[1].startsWith("products/")) {
     borrarProductosPorID()
 } 
 else {
-    console.log(chalk.bgGray('Comando no reconocido. Usa "GET rpoducts", "POST products" o "DELETE products/".'))
+    console.log(chalk.bgGray('Comando no reconocido. Usa "GET products", "POST products" o "DELETE products/".'))
 }
 
 
