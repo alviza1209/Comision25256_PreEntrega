@@ -87,8 +87,6 @@ else if (args[0] === 'POST' && args[1] === "products") {
         } 
     crearNuevoProducto()      
 } 
-
-
 else if (args[0] === 'PUT' && args[1].startsWith("products/")) {
     async function modificarProducto() {
          try {
@@ -116,8 +114,6 @@ else if (args[0] === 'PUT' && args[1].startsWith("products/")) {
             else {
                 console.log(`El Producto con el ID ${id} NO fué encontrado`)
             }
-
-
         }   
         catch(error)  {
                     console.error("Ocurrió un error al modificar el producto: ", error)
@@ -128,8 +124,6 @@ else if (args[0] === 'PUT' && args[1].startsWith("products/")) {
         }    
     modificarProducto()  
 }
-
-
 else if (args[0] === 'DELETE' && args[1].startsWith("products/")) {
     async function borrarProductosPorID() {
         try {
