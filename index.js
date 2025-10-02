@@ -27,7 +27,7 @@ if (args[0] === "GET" && args[1] === "products") {
     busquedaDatosFakeStore() 
 }
 else if (args[0] === 'GET' && args[1].startsWith("products/")) {
-    // con startsWith valido la 
+    // con startsWith valído que sea positiva la segunda parte de la condición para luego separar el id
     async function busquedaProductosID() {
         try {
             // extraigo con startsWith el indice o ID que quiero buscar
@@ -87,6 +87,49 @@ else if (args[0] === 'POST' && args[1] === "products") {
         } 
     crearNuevoProducto()      
 } 
+
+
+else if (args[0] === 'PUT' && args[1].startsWith("products/")) {
+    async function modificarProducto() {
+         try {
+            const id = args[1].split("/")[1]
+            const respuesta = await fetch('https://fakestoreapi.com/products') 
+            if (!respuesta.ok) {
+                throw new Error(`HTTP error! Status: ${respuesta.status}`)
+            }            
+            const datos = await respuesta.json()
+            const productoPorIDEncontrado = datos.find(producto => producto.id == id)
+            if (productoPorIDEncontrado) {
+                console.log(chalk.bold.blue("El Producto Encontrado para Modificar con el ID ") 
+                + chalk.bold.yellow(`${id}`) + chalk.bold.blue(", es: "), productoPorIDEncontrado)
+                const productoModifi = {title: "Título Producto Modificado", price: 1555.99, description: "Nueva descripción del Producto Modificado", 
+                    category: "Categoría Modificada"}
+                const respuesta2 = await fetch(`https://fakestoreapi.com/products/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(productoModifi)
+                })
+                const respuMod = await respuesta2.json()
+                console.log(chalk.bold.blueBright("Producto después de ser modificado"),  respuMod)
+                return respuMod
+            }
+            else {
+                console.log(`El Producto con el ID ${id} NO fué encontrado`)
+            }
+
+
+        }   
+        catch(error)  {
+                    console.error("Ocurrió un error al modificar el producto: ", error)
+            }
+        finally {
+                    console.log(chalk.bgGray("Tarea Modificando el Producto finalizada."))
+            } 
+        }    
+    modificarProducto()  
+}
+
+
 else if (args[0] === 'DELETE' && args[1].startsWith("products/")) {
     async function borrarProductosPorID() {
         try {
@@ -117,7 +160,7 @@ else if (args[0] === 'DELETE' && args[1].startsWith("products/")) {
     borrarProductosPorID()
 } 
 else {
-    console.log(chalk.bgGray('Comando no reconocido. Usa "GET products", "POST products" o "DELETE products/".'))
+    console.log(chalk.bgGray('Comando no reconocido. Usa "GET products", "POST products", "PUT products/" o "DELETE products/".'))
 }
 
 
