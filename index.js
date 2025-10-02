@@ -100,8 +100,13 @@ else if (args[0] === 'PUT' && args[1].startsWith("products/")) {
             if (productoPorIDEncontrado) {
                 console.log(chalk.bold.blue("El Producto Encontrado para Modificar con el ID ") 
                 + chalk.bold.yellow(`${id}`) + chalk.bold.blue(", es: "), productoPorIDEncontrado)
-                const productoModifi = {title: "Título Producto Modificado", price: 1555.99, description: "Nueva descripción del Producto Modificado", 
-                    category: "Categoría Modificada"}
+                const productoModifi = {
+                    title: args[2] || "Título Producto Modificado", 
+                    price: args[3] || 0.1, 
+                    description: args[4] || "Nueva descripción del Producto Modificado",
+                    image: args[5]|| "https://fakestoreapi.com/img/imagen_ejemplo_modificada.png",
+                    category: args[6] || "Categoría Modificada"
+                }
                 const respuesta2 = await fetch(`https://fakestoreapi.com/products/${id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
