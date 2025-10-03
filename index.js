@@ -58,7 +58,7 @@ else if (args[0] === 'POST' && args[1] === "products") {
     async function crearNuevoProducto() {
         const productoNuevo = {
             title: args[2] || "Producto sin Especificar",
-            price: args[3] || 0,
+            price: parseFloat(args[3] || 0), //parseo el precio para que lo convierta a número
             description: args[4] || "Pendiente por descripcion",
             image: args[5] || "http://example.com",
             category: args[6] || "Categoría por asignar"
@@ -102,7 +102,7 @@ else if (args[0] === 'PUT' && args[1].startsWith("products/")) {
                 + chalk.bold.yellow(`${id}`) + chalk.bold.blue(", es: "), productoPorIDEncontrado)
                 const productoModifi = {
                     title: args[2] || "Título Producto Modificado", 
-                    price: args[3] || 0.1, 
+                    price: parseFloat(args[3] || 0.1), 
                     description: args[4] || "Nueva descripción del Producto Modificado",
                     image: args[5]|| "https://fakestoreapi.com/img/imagen_ejemplo_modificada.png",
                     category: args[6] || "Categoría Modificada"
