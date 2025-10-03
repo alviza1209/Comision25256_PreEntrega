@@ -11,7 +11,7 @@ if (args[0] === "GET" && args[1] === "products") {
             const datos = await respuesta.json()
             //const productos = datos.map(producto => producto)
             const productos = datos.map(({ id, title, price }) => ({ id, title, price }))
-            console.log('Lista Completa de Productos: ')
+            console.log(chalk.magentaBright('Lista Completa de Productos: '))
             /*productos.forEach(p => {
                 console.log(`${p.id} | ${p.title} | ${p.price} | ${p.category}`)
                 }) */
@@ -58,7 +58,7 @@ else if (args[0] === 'POST' && args[1] === "products") {
     async function crearNuevoProducto() {
         const productoNuevo = {
             title: args[2] || "Producto sin Especificar",
-            price: parseFloat(args[3] || 0), //parseo el precio para que lo convierta a número
+            price: isNaN(parseFloat(args[3])) ? 0 : parseFloat(args[3]), //parseo el precio para que lo convierta a número y evalúo si es un número válido
             description: args[4] || "Pendiente por descripcion",
             image: args[5] || "http://example.com",
             category: args[6] || "Categoría por asignar"
@@ -102,7 +102,7 @@ else if (args[0] === 'PUT' && args[1].startsWith("products/")) {
                 + chalk.bold.yellow(`${id}`) + chalk.bold.blue(", es: "), productoPorIDEncontrado)
                 const productoModifi = {
                     title: args[2] || "Título Producto Modificado", 
-                    price: parseFloat(args[3] || 0.1), 
+                    price: isNaN(parseFloat(args[3])) ? 0.1 : parseFloat(args[3]), 
                     description: args[4] || "Nueva descripción del Producto Modificado",
                     image: args[5]|| "https://fakestoreapi.com/img/imagen_ejemplo_modificada.png",
                     category: args[6] || "Categoría Modificada"
